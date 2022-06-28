@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+{% endblock %}
+{% block content %}
+
+<div class="container">
+    <div>
+        <div class="row">
+
+
+    <div class="row mx_auto">
+        {% if products %}
+            {% for product in products.object_list %}
+            <div class="my_bottom_margin col-9 col-sm-12 col-md-4  xol-lg-4">
+                <a href="{{product.get_url}}">
+                    <div class="card text-center" style="min-width:18rem">
+                        {% if product.image %}
+                       <img width="250" height="300" class="img-responsive card-img-top rounded d-block" src="{{product.image.url}}" alt="{{product.name}}">
+                        {% endif %}
+                        <div class="card-body">
+                            <h4>{{product.name}}</h4>
+                            <p>{{product.price}}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p style="text-align:center;">No products found!</p>
+        {% endif %}
+         </div>
+    </div>
+    </div>
+    <div class="mx_auto">
+        {% if products.paginator.num_pages > 1 %}
+        <hr>
+        <div class="text-center">
+            {% for pg in products.paginator.page_range %}
+            <a href= " ?page={{pg}} " class="btn btn-light btn-sm {% if products.number == pg %} active {% endif %}" {{pg}}></a>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+    <br>
+    </div>
+{% endblock %}

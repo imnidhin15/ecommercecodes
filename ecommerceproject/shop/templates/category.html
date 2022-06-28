@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+    {% if category %}
+        {{category.description|truncatewords:155 }}
+    {% else %}
+        Welcome to MCkart where you can buy everything.
+    {% endif %}
+{% endblock %}
+{% block title %}
+{% if category %}
+        {{category.name}} - MCkart
+    {% else %}
+        Mega shopping hours are back
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {% if category %}
+    <div>
+        <div class="row my_row_class">
+            <div class="mx-auto">
+
+
+            <p> <a href="{% url 'shop:AllproductCat' %}" > check out the new stocks in offer price</a> </p>
+        </div>
+            </div>
+    </div>
+    {% endif %}
+<div class="mx_auto">
+    {% if category %}
+     {% if category.image %}
+    <img class="my_image" src="{{category.image.url}}" alt="{{category.name}}">
+     {% endif %}
+</div>
+    <br>
+<div>
+    <h1 class="text-center my_title" >
+        {{category.name}}
+    </h1>
+    <p class="text-justify">{{category.description}}</p>
+</div>
+    {% else %}
+<div>
+<img width="1345px" class="my_image_padding" src="{% static 'image/banner.png' %}" alt="new products" >
+    </div>
+<br>
+<div>
+    <h1 class="text-center my_title">
+        Our products
+    </h1>
+    <p style= class="text-justify"> <b>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged</b></p>
+</div>
+    {% endif %}
+{% endblock %}
